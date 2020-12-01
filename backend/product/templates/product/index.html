@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+{% for product in products %}
+    <hr>
+    <h2>{{ product.product_id }}</h2>
+    <p>{{ product.product_code }}</p>
+    <p>{{ product.product_name }}</p>
+    <p>{{ product.product_type }}</p>
+    <p>{{ product.product_image }}</p>
+    <img src="{{ product.product_image.url }}" width="240"/>
+    <p>{{ product.product_price }}</p>
+    <p>{{ product.product_desciption }}</p>
+{% endfor %}
+
+</body>
+</html> 
