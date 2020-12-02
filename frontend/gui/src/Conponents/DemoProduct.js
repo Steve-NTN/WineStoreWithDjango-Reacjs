@@ -55,7 +55,11 @@ class DemoProduct extends Component {
             this.displayNotice("Bạn cần đăng nhập để mua sản phẩm")
         }
     }
-        
+    
+    clickLike = ()=>{
+        alert("Xử lí đánh giá sản phẩm")
+    }
+
     render() {
         var products = this.state.products
         let elements = products.map((product, index) => {
@@ -67,7 +71,8 @@ class DemoProduct extends Component {
                                 <div className="product-option">
                                     <p className="option-box" to="/#" product_code={product.product_code}
                                         onClick={() => this.clickBuy(product.product_id)}><FontAwesomeIcon icon={faShoppingCart} /></p>
-                                    <Link className="option-box" to="/#"><FontAwesomeIcon icon={faHeart} /></Link>
+                                    <Link className="option-box" to="/#"
+                                        onClick={this.clickLike}><FontAwesomeIcon icon={faHeart} /></Link>
                                     <Link className="option-box" to="/viewproduct" product_code={product.product_code} 
                                         onClick={()=> this.clickView(product.product_code)}><FontAwesomeIcon icon={faEye} /></Link>
                                 </div>  

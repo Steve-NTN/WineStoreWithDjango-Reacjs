@@ -11,6 +11,7 @@ export default class Logout extends Component {
             document.getElementById('login-btn').style.display = "block"
             localStorage.removeItem("token")
             localStorage.removeItem("username")
+            localStorage.removeItem("totalPrice")
             document.getElementById("selected-quantity").innerHTML = 0
         }
         

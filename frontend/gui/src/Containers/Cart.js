@@ -49,6 +49,11 @@ export default class Cart extends Component {
         document.getElementById("selected-quantity").innerHTML = parseInt(document.getElementById("selected-quantity").innerHTML) - 1
     };
 
+    clickPay = () =>{
+        
+        alert("Xử lí thanh toán")
+    }
+
     render() {
         if(!this.state.loggedIn) {
             return (
@@ -60,12 +65,14 @@ export default class Cart extends Component {
                 </div>
             )
         } else {
+            localStorage.setItem("totalPrice", 0)
             var orders = this.state.orders
             let elements = orders.map((order,index) => {
                 return (    
-                    <ProductCart data={order} remove={this.remove} key={index} totalPrice={this.state.totalPrice}/>
+                    <ProductCart data={order} remove={this.remove} key={index} totalPriceChange={this.totalPriceChange}/>
                 )
             })
+            
             return (
                 <div>
                     <Welcome />
@@ -98,8 +105,13 @@ export default class Cart extends Component {
                     <section className="cart-total">
                         <div className="container">
                             <h2 onClick={this.getTotal} style={{ cursor: 'pointer' }}>Tổng tiền</h2>
-                            <p id="sum-total">{this.state.totalPrice}</p>
+                            <p id="sum-total"></p>
                         </div>
+                        <div className='container'>
+                        <div className="row" style={{textAlign: 'center'}} data-aos="zoom-in" data-aos-delay="200">
+                            <button className="btn post-btn btn-view-all" onClick={this.clickPay}>Thanh toán</button>
+                        </div>
+                    </div>
                     </section>
                     <BonusAbout />
                     <Tailer />

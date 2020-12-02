@@ -27,6 +27,7 @@ class ProductCart extends Component {
 
     quantityChanged = event =>{
         var sumA = this.state.sumA
+        localStorage.setItem("totalPrice", parseInt(localStorage.getItem("totalPrice") - sumA))
         sumA = event.target.value * this.state.product.product_price;
         this.setState({
             sumA: sumA,
@@ -34,9 +35,18 @@ class ProductCart extends Component {
         });
     }
 
+    onPriceChange = (sumA) =>{
+        this.setState({
+            totalPrice: this.state.totalPrice + sumA
+        })
+    }
+
     render() {
         var data = this.props.data
         var product = this.state.product
+        var sumA = parseInt(localStorage.getItem("totalPrice")) + this.state.sumA
+        localStorage.setItem("totalPrice", sumA)
+        document.getElementById("sum-total").innerHTML = localStorage.getItem("totalPrice") + ' $'
         return (
             <tr>
                 <td style={{display:'flex', alignItems:'center'}}>
