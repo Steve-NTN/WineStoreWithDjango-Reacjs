@@ -77,6 +77,10 @@ class ListProduct extends Component {
         }
     }
 
+    clickLike = ()=>{
+        alert("Xử lí đánh giá sản phẩm")
+    }
+
     render() {
         var products = this.state.products
         var quantity = this.state.quantity
@@ -89,7 +93,7 @@ class ListProduct extends Component {
                                 <div className="product-option">
                                     <p className="option-box" to="/#" product_code={product.product_code}
                                         onClick={() => this.clickBuy(product.product_id)}><FontAwesomeIcon icon={faShoppingCart} /></p>
-                                    <Link className="option-box" to="/#"><FontAwesomeIcon icon={faHeart} /></Link>
+                                    <Link className="option-box"  onClick={this.clickLike}><FontAwesomeIcon icon={faHeart} /></Link>
                                     <Link className="option-box" to="/viewproduct" product_code={product.product_code} 
                                         onClick={()=> this.clickView(product.product_code)}><FontAwesomeIcon icon={faEye} /></Link>
                                 </div>  
