@@ -41,8 +41,9 @@ def product_detail_with_code(request, product_code):
     return Response(serializer.data)
 
 # Get detail of product
-@api_view(['GET'])
-def product_detail_with_id(request, product_id):
-    product = Product.objects.get(product_id=product_id)
+@api_view(['GET', 'POST'])
+def product_detail_with_id(request):
+    print(request.data)
+    product = Product.objects.get(product_id=request.data.get('product_id'))
     serializer = GetAllProductSerializer(product, many=False)
     return Response(serializer.data)
