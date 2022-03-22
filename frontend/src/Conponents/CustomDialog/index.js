@@ -1,12 +1,12 @@
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import React from 'react';
-import useStyles from './styles';
+// import useStyles from './styles';
 
 
 const CustomDialog = ({
   openDialog, closeDialog, dialogTitle, dialogContent
 }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <Dialog open={openDialog} onClose={closeDialog}>

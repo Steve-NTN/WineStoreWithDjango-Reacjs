@@ -1,11 +1,11 @@
 import React from 'react';
-import useStyles from './styles';
+// import useStyles from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import CustomDialog from '../CustomDialog';
 import { setLoading } from '../../actions/loadingAction';
 
 const Loading = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const loading = useSelector((state) => state.loadingReducer);
   const dispatch = useDispatch();
 

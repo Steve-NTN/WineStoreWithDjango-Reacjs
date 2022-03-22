@@ -54,10 +54,14 @@ const Banner = () => {
         <Typography variant='h4' className={classes.titleText}>NTNWINE</Typography>
         <Typography variant='h5' className={classes.titleText}>Sản phẩm của chúng tôi sẽ khiến bạn phải hài lòng</Typography>
         <Button className={classes.btn} onClick={() => history.push('/product')}
-          sx={{backgroundColor: '#fff', padding: {md: `16px 32px`, sm: `8px 16px`}, borderRadius: 7, color: '#000', marginTop: 2}}
+          sx={{backgroundColor: '#fff', padding: {md: `16px 32px`, sm: `8px 16px`}, borderRadius: 7, color: '#000', marginTop: 2,
+            textTransform: 'none'
+          }}
         >
-          <Typography>Xem ngay</Typography> 
-          <ArrowForwardIcon />
+          <Typography variant='body1' sx={{display: 'flex', alignItems: 'center'}}>
+            Xem ngay
+            <ArrowForwardIcon />
+          </Typography> 
         </Button>
 
           <Box sx={{height: '50px'}} className={classes.dotBox}>

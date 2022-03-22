@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle, Typography, Box, Rating } from '@mui/material';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import apiTemplate from '../../api';
 import useStyles from './styles';
 import configs from '../../configs';
@@ -26,7 +26,7 @@ const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
       })
     };
     getData();
-  }, [product]);
+  }, [product, dispatch]);
 
   // const getData = () => {
   //   console.log(product, 'hello')
@@ -55,9 +55,11 @@ const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
             </Typography>
           </DialogTitle>
           <DialogContent>
-            <img src={`${configs.DOMAIN}${data?.product_image}`} 
-              style={{maxWidth: '100%'}}
-            />
+            <Box sx={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+              <img src={`${configs.DOMAIN}${data?.product_image}`} 
+                style={{maxWidth: '100%', maxHeight: 300}} alt='img_pro'
+              />
+            </Box>
             <Box className={classes.productText}>
               <Typography sx={{fontWeight: 600, color: 'red'}}>
                 $ {data?.product_price}

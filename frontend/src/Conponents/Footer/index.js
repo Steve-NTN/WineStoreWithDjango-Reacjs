@@ -44,7 +44,7 @@ const Footer = () => {
   return (
     <Box className={classes.footer}>
       <Grid container sx={{padding: 2}}>
-        <Grid item md={3} sm={6} xs={12}>
+        <Grid item md={3} sm={6} xs={12} sx={{marginBottom: {xs: 2}}}>
           <Typography variant='h5'>NTNWINE Store</Typography>
           <Typography variant='body1'>THE SMART CHOICE</Typography>
         </Grid>
@@ -85,7 +85,7 @@ const Footer = () => {
 
         <Grid item md={3} sm={6} xs={12} position='relative'>
           <Typography variant='h5'>Mạng xã hội</Typography>
-          <Typography>Theo dõi chúng tôi trên</Typography>
+          <Typography sx={{margin: {md: '16px 0', xs: '8px 0'}}}>Theo dõi chúng tôi trên</Typography>
           <Box className={classes.socialBox}>
             {
               socialMedia.map((option, index) => (

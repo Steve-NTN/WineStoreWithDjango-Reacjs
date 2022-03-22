@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Typography, Grid, Box, Button, Card, CardMedia, CardContent, CardActions, CardActionArea } from '@mui/material';
+import { Typography, Grid, Box, Card, CardMedia, CardContent, CardActionArea } from '@mui/material';
 import useStyles from './styles';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -7,7 +7,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import apiTemplate from '../../api';
 import configs from '../../configs';
 import ProductDetail from '../ProductDetail';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setLoading } from '../../actions/loadingAction';
 import Loading from '../Loading';
 

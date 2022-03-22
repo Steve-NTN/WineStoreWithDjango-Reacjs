@@ -1,43 +1,33 @@
 import { Box, Grid, Typography, IconButton } from '@mui/material';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import useStyles from './styles';
 import { Link } from 'react-router-dom';
+import apiTemplate from '../../api';
+import configs from '../../configs';
+import noImage from '../../assets/image/no-image.png';
+import { useDispatch } from 'react-redux';
+import { setLoading } from '../../actions/loadingAction';
+import Loading from '../Loading';
 
 const ProductCategory = () => {
   const classes = useStyles();
-    
-  var typeList = [
-    {
-      typeName: 'Brandy',
-      typeImage: '../assets/img/kind-1.jpg',
-      typeDes: 'Type 1'
-    },
-    {
-      typeName: 'Gin',
-      typeImage: '../assets/img/kind-2.jpg',
-      typeDes: 'Type 2'
-    },
-    {
-      typeName: 'Rum',
-      typeImage: '../assets/img/kind-3.jpg',
-      typeDes: 'Type 3'
-    },
-    {
-      typeName: 'Tequila',
-      typeImage: '../assets/img/kind-4.jpg',
-      typeDes: 'Type 4'
-    },
-    {
-      typeName: 'Vodka',
-      typeImage: '../assets/img/kind-5.jpg',
-      typeDes: 'Type 5'
-    },
-    {
-      typeName: 'Whiskey',
-      typeImage: '../assets/img/kind-6.jpg',
-      typeDes: 'Type 6'
-    },
-  ];
+  const [data, setData] = useState(null);
+  const dispatch = useDispatch();
+
+  useEffect(() =>  {
+    dispatch(setLoading({open: true}));
+    const getData = async () => {
+      await apiTemplate('/product/product-category', null, null, (res)=> {
+        setData(res);
+        console.log(res);
+        dispatch(setLoading({open: false}));
+      }, (error) => {
+        console.log(error);
+        dispatch(setLoading({open: false}));
+      })
+    };
+    getData();
+  }, [dispatch]);
 
   return (
     <Box my={4}>
@@ -48,25 +38,26 @@ const ProductCategory = () => {
 
       <Grid container sx={{marginTop: 2}}>
         {
-          typeList.map((category, index) => (
+          data && data.map((category, index) => (
             <Grid md={3} sm={4} xs={6} item key={index} className={classes.categoryCard}>
               <IconButton className={classes.categoryImg} sx={{
-                backgroundImage: `url(${category.typeImage})`
+                backgroundImage: `url(${category.product_category_image? `${configs.DOMAIN}${category.product_category_image}`: noImage})`
               }}>
                 <Box >
 
                 </Box>
               </IconButton>
               <Link className={classes.categoryName} to='/product/category/'>
-                {category.typeName}
+                {category?.product_category_name}
               </Link>
               <Typography variant='body2'>
-                {category.typeDes}
+                {category?.product_category_org}
               </Typography>
             </Grid>
           ))
         }
       </Grid>
+      <Loading/>
     </Box>
   );
 }
