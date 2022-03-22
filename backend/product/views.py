@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Product, ProductCategory
 from rest_framework.decorators import api_view
-from .serializers import GetAllProductSerializer
+from .serializers import GetAllProductSerializer, GetAllProductCategorySerializer
 from django.http import JsonResponse
 from rest_framework.response import Response
 
@@ -46,4 +46,12 @@ def product_detail_with_id(request):
     print(request.data)
     product = Product.objects.get(product_id=request.data.get('product_id'))
     serializer = GetAllProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
+# Get all of product category
+@api_view(['GET'])
+def get_all_category(request):
+    product_categories = ProductCategory.objects.all()
+    serializer = GetAllProductCategorySerializer(product_categories, many=True)
     return Response(serializer.data)
