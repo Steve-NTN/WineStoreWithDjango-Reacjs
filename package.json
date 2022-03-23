@@ -2,6 +2,10 @@
   "name": "ntnwine",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "NTN",
+    "email": "trongnghiafes@gmail.com"
+  },
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
@@ -53,5 +57,6 @@
   "engines": {
     "node": "16.5.0",
     "npm": "8.5.4"
-  }
+  },
+  "homepage": "http://ntnwine.com/"
 }
