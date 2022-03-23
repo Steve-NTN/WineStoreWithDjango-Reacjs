@@ -1,2 +1,6 @@
 .vscode
 .python-version
+/node_modules
+package-lock.json
+.env
+.vscode
