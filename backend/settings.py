@@ -86,7 +86,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
-    'ntnwine-reactjs.herokuapp.com', 'ntnwine-django.herokuapp.com', '127.0.0.1:8000', 'localhost'
+    # 'http://ntnwine-reactjs.herokuapp.com', 
+    'http://ntnwine-django.herokuapp.com',
+    'http://127.0.0.1:8000',
+    'http://localhost'
 ]
 
 # Database
