@@ -17,7 +17,7 @@ const ProductCategory = () => {
   useEffect(() =>  {
     dispatch(setLoading({open: true}));
     const getData = async () => {
-      await apiTemplate('/product/product-category', null, null, (res)=> {
+      await apiTemplate('/product-category', null, null, (res)=> {
         setData(res);
         console.log(res);
         dispatch(setLoading({open: false}));
@@ -41,13 +41,13 @@ const ProductCategory = () => {
           data && data.map((category, index) => (
             <Grid md={3} sm={4} xs={6} item key={index} className={classes.categoryCard}>
               <IconButton className={classes.categoryImg} sx={{
-                backgroundImage: `url(${category.product_category_image? `${configs.DOMAIN}${category.product_category_image}`: noImage})`
+                backgroundImage: `url(${category.product_category_image? `${configs.DOMAIN_MEDIA}${category.product_category_image}`: noImage})`
               }}>
                 <Box >
 
                 </Box>
               </IconButton>
-              <Link className={classes.categoryName} to='/product/category/'>
+              <Link className={classes.categoryName} to={`/${category?.product_category_name}`}>
                 {category?.product_category_name}
               </Link>
               <Typography variant='body2'>

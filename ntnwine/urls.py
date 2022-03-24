@@ -1,5 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+# from rest_framework.authtoken import views as re_views
+from .auth import CustomAuthToken
 
 
 urlpatterns = [
@@ -9,6 +11,7 @@ urlpatterns = [
     path('detail-with-code/<str:product_code>', views.product_detail_with_code, name='product_detail_with_code'),
     path('product-detail', views.product_detail_with_id, name='product_detail_with_id'),
     path('product-category', views.get_all_category, name='product_category'),
+    path('api-token-auth/', CustomAuthToken.as_view())
 
     # order
     # path('orders/', views.orders, name='orders'),

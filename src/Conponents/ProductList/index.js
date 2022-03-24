@@ -10,6 +10,7 @@ import ProductDetail from '../ProductDetail';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../../actions/loadingAction';
 import Loading from '../Loading';
+import noImage from '../../assets/image/no-image.png';
 
 const ProductList = () => {
   const classes = useStyles();
@@ -52,7 +53,7 @@ const ProductList = () => {
   useEffect(() =>  {
     const getData = async () => {
       dispatch(setLoading({open: true}));
-      await apiTemplate('/product/products', null, null, (res)=> {
+      await apiTemplate('/products', null, null, (res)=> {
         setProductList(res);
         dispatch(setLoading({open: false}));
       }, (error) => {
@@ -79,7 +80,7 @@ const ProductList = () => {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={`${configs.DOMAIN}${product?.product_image}`}
+                    image={product?.product_image? `${configs.DOMAIN_MEDIA}${product?.product_image}`: noImage}
                     alt="green iguana"
                   />
                   <CardContent>

@@ -29,8 +29,8 @@ const LoginForm = () => {
   const submitForm = async (e)=> {
     e.preventDefault();
     dispatch(setLoading({open: true}));
-    await apiTemplate('/auth/', 'POST', account, (res)=> {
-      dispatch(setUser({token: res.token}));
+    await apiTemplate('/api-token-auth/', 'POST', account, (res)=> {
+      dispatch(setUser(res));
       dispatch(setLoading({open: false}));
 
       if(res.token){

@@ -1,7 +1,8 @@
 const initialState = {
   token: null,
   phone: null,
-  name: null
+  first_name: null,
+  email: null
 }
 
 const userReducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const userReducer = (state = initialState, action) => {
         ...state,
         token: action.payload.token,
         phone: action.payload.phone,
-        name: action.payload.name
+        first_name: action.payload.first_name,
+        email: action.payload.email
       }
       default:
       return state

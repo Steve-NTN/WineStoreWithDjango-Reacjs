@@ -1,7 +1,6 @@
 {
   "name": "ntnwine",
-  "homepage": "/ntnwinea-app",
-  "root": "/ntnwinea-app",
+  "proxy": "http://localhost:8000",
   "version": "0.1.0",
   "private": true,
   "author": {

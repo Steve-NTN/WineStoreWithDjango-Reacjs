@@ -86,7 +86,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000"
+    'ntnwine-reactjs.herokuapp.com', 'ntnwine-django.herokuapp.com', '127.0.0.1:8000', 'localhost'
 ]
 
 # Database
@@ -135,10 +135,18 @@ USE_TZ = True
 
 # CORS_ORIGIN_ALLOW_ALL = True
 
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
+
+
+
 # import django_heroku
-# django_heroku.settings(locals())
-
-
+# import dotenv
 # import dj_database_url
-# prod_db = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(prod_db)
+# # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR = Path(__file__).resolve().root.root
+
+# dotenv_file = os.path.join(BASE_DIR, ".env")
+# if os.path.isfile(dotenv_file):
+#     dotenv.load_dotenv(dotenv_file)

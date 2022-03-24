@@ -7,6 +7,7 @@ import configs from '../../configs';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../../actions/loadingAction';
 import Loading from '../Loading';
+import noImage from '../../assets/image/no-image.png';
 
 const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
   const classes = useStyles();
@@ -16,7 +17,7 @@ const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
   useEffect(() =>  {
     const getData = async () => {
       dispatch(setLoading({open: true}));
-      await apiTemplate('/product/product-detail', 'POST', {product_id: product?.product_id}, (res)=> {
+      await apiTemplate('/product-detail', 'POST', {product_id: product?.product_id}, (res)=> {
         setData(res);
         console.log(res);
         dispatch(setLoading({open: false}));
@@ -56,7 +57,7 @@ const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
           </DialogTitle>
           <DialogContent>
             <Box sx={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-              <img src={`${configs.DOMAIN}${data?.product_image}`} 
+              <img src={data?.product_image? `${configs.DOMAIN_MEDIA}${data?.product_image}`: noImage}
                 style={{maxWidth: '100%', maxHeight: 300}} alt='img_pro'
               />
             </Box>

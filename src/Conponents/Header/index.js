@@ -20,7 +20,7 @@ export default function Header() {
   const classes = useStyles();
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.userReducer.token);
+  const user = useSelector((state) => state.userReducer);
   const [showLeftTogger, setShowLeftTogger] = useState(false);
   const [showUserOption, setShowUserOption] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,15 +63,15 @@ export default function Header() {
 
   const clickLogout = () => {
     dispatch(setUser({
-      token: null, phone: null, name: null
+      token: null, phone: null, first_name: null, email: null
     }));
     history.push('/login');
   };
   
   const userOptions = [
     {label: "Đăng nhập", event: opendLoginForm, icon: <PersonIcon className={classes.icon}/>, hidden: false},
-    {label: "Đăng ký", event: opendRegisterForm, icon: <PersonAddIcon className={classes.icon}/>, hidden: (token? true: false) },
-    {label: "Đăng xuất", event: clickLogout, icon: <LogoutIcon className={classes.icon}/>, hidden: (token? false: true)}
+    {label: "Đăng ký", event: opendRegisterForm, icon: <PersonAddIcon className={classes.icon}/>, hidden: (user? true: false) },
+    {label: "Đăng xuất", event: clickLogout, icon: <LogoutIcon className={classes.icon}/>, hidden: (user? false: true)}
   ];
 
   const handleClickLink = (link, index, page) => {
@@ -153,7 +153,7 @@ export default function Header() {
 
           <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <Avatar alt={user?.first_name} src="/static/images/avatar/2.jpg" />
             </IconButton>
             <Menu open={showUserOption} onClose={() => setShowUserOption(false)}
               anchorOrigin={{
