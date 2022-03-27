@@ -3,9 +3,8 @@ from . import views
 # from rest_framework.authtoken import views as re_views
 from .auth import CustomAuthToken
 
-
 urlpatterns = [
-    # path('', views.home, name='home'),
+    path('', views.index, name='index'),
     path('products', views.products, name='products'),
     path('products_a_page/<str:index_page>', views.products_a_page, name='products_a_page'),
     path('detail-with-code/<str:product_code>', views.product_detail_with_code, name='product_detail_with_code'),
