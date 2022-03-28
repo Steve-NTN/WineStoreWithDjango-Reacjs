@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-{% load static %}
+{% load build %}
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="{% static 'ntnwine/favicon.ico' %}" />
-    <link rel="manifest" href="{% static 'ntnwine/manifest.json' %}" />
+    <link rel="icon" href="{% build 'favicon.ico' %}" />
+    <link rel="manifest" href="{% build 'manifest.json' %}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="ntnwine"
@@ -13,8 +13,6 @@
     <title>NTNWine Store</title>
   </head>
   <body style="margin: 0">
-    <h1>NTNWINE</h1>
-    <img src="{% static 'ntnwine/test.jpg' %}" alt="My image">
     <div id="root"></div>
   </body>
 </html>
