@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'build')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
 ]
