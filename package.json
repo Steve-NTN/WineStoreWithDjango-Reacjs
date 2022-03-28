@@ -33,8 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "npm run build",
-    "relocate": "react-scripts build && rm -rf ../static && mv -f build ../static"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": [
