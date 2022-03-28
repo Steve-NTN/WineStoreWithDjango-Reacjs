@@ -11,25 +11,25 @@ const Banner = () => {
 
   const imageList = [
     {   
-      imageLink: "/assets/img/h1-img-1.jpg", imageDes: "Image 1"
+      imageLink: "{% media 'image/h1-img-1.jpg' %}", imageDes: "Image 1"
     }, 
     {   
-      imageLink: "/assets/img/h1-img-2.jpg", imageDes: "Image 2"
+      imageLink: "{% media 'image/h1-img-2.jpg' %}", imageDes: "Image 2"
     }, 
     {
-      imageLink: "/assets/img/h1-img-3.jpg", imageDes: "Image 3"
+      imageLink: "{% media 'image/h1-img-3.jpg' %}", imageDes: "Image 3"
     }, 
     {
-      imageLink: "/assets/img/h1-img-4.jpg", imageDes: "Image 4"
+      imageLink: "{% media 'image/h1-img-4.jpg' %}", imageDes: "Image 4"
     }, 
     {
-      imageLink: "/assets/img/h1-img-5.jpg", imageDes: "Image 5"
+      imageLink: "{% media 'image/h1-img-5.jpg' %}", imageDes: "Image 5"
     }, 
     {
-      imageLink: "/assets/img/h1-img-6.jpg", imageDes: "Image 6"
+      imageLink: "{% media 'image/h1-img-6.jpg' %}", imageDes: "Image 6"
     }, 
     {
-      imageLink: "/assets/img/h1-img-7.jpg", imageDes: "Image 7"
+      imageLink: "{% media 'image/h1-img-7.jpg' %}", imageDes: "Image 7"
     }
   ];
 
