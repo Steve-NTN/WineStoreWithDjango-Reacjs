@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from .views import index
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', index, name='index.html'),
     path('admin/', admin.site.urls),
     path('api/', include('ntnwine.urls'))
 ] + static(
