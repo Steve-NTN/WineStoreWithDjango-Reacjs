@@ -3,6 +3,13 @@ import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { useHistory } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import banner1 from '../../assets/image/h1-img-1.jpg';
+import banner2 from '../../assets/image/h1-img-2.jpg';
+import banner3 from '../../assets/image/h1-img-3.jpg';
+import banner4 from '../../assets/image/h1-img-4.jpg';
+import banner5 from '../../assets/image/h1-img-5.jpg';
+import banner6 from '../../assets/image/h1-img-6.jpg';
+import banner7 from '../../assets/image/h1-img-7.jpg';
 
 const Banner = () => {
   const classes = useStyles();
@@ -10,27 +17,13 @@ const Banner = () => {
   const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
 
   const imageList = [
-    {   
-      imageLink: "{% media 'image/h1-img-1.jpg' %}", imageDes: "Image 1"
-    }, 
-    {   
-      imageLink: "{% media 'image/h1-img-2.jpg' %}", imageDes: "Image 2"
-    }, 
-    {
-      imageLink: "{% media 'image/h1-img-3.jpg' %}", imageDes: "Image 3"
-    }, 
-    {
-      imageLink: "{% media 'image/h1-img-4.jpg' %}", imageDes: "Image 4"
-    }, 
-    {
-      imageLink: "{% media 'image/h1-img-5.jpg' %}", imageDes: "Image 5"
-    }, 
-    {
-      imageLink: "{% media 'image/h1-img-6.jpg' %}", imageDes: "Image 6"
-    }, 
-    {
-      imageLink: "{% media 'image/h1-img-7.jpg' %}", imageDes: "Image 7"
-    }
+    {imageLink: banner1, imageDes: "Image 1"}, 
+    {imageLink: banner2, imageDes: "Image 2"}, 
+    {imageLink: banner3, imageDes: "Image 3"}, 
+    {imageLink: banner4, imageDes: "Image 4"}, 
+    {imageLink: banner5, imageDes: "Image 5"}, 
+    {imageLink: banner6, imageDes: "Image 6"}, 
+    {imageLink: banner7, imageDes: "Image 7"}
   ];
 
   useEffect(() => {
