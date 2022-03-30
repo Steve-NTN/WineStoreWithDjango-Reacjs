@@ -35,10 +35,10 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'build')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -77,7 +77,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],
+        'DIRS': [os.path.join(BASE_DIR, 'build'), os.path.join(BASE_DIR, 'media')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
     'https://ntnwine.herokuapp.com',
-    'http://127.0.0.1:8000',
+    'http://127.0.0.1:3000',
     'http://localhost'
 ]
 

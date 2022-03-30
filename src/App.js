@@ -6,6 +6,10 @@ import theme from './theme';
 import { ThemeProvider } from '@mui/material/styles';
 import {Home, Login, Product, Cart} from './pages';
 // import './App.css';
+import axios from 'axios';
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 const App = () => {
   const history = useHistory();
