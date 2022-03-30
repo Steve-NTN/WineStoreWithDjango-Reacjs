@@ -14,7 +14,7 @@ class ProductCategory(models.Model):
 class Product(models.Model):
     product_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product_name = models.CharField(max_length=150)
-    product_code = models.CharField(max_length=20)
+    product_code = models.CharField(max_length=150)
     product_category = models.ForeignKey(ProductCategory, null=True, on_delete=models.SET_NULL)
     product_image = models.ImageField(upload_to='image', blank=True, null=True)
     product_vote = models.IntegerField(default=0)
