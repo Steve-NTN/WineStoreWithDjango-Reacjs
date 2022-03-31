@@ -2,7 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 export default makeStyles((theme) => ({
   titleText: {
-    
+    marginBottom: `${theme.spacing(2)} !important`
   },
   buttonLeftHis: {
     overflow: 'hidden',
