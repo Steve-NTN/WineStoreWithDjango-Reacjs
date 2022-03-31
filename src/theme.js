@@ -7,6 +7,9 @@ theme.root = {...theme.root,
 }
 
 theme.typography = {...theme.typography,
+  typography: {
+    fontFamily: "'Inter', sans-serif !important",
+  },
   body1: {
     fontSize: 16,
     [theme.breakpoints.down("sm")]: {

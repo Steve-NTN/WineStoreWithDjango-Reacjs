@@ -8,21 +8,21 @@ import React from 'react';
 // import ReviewProduct from '../Conponents/ReviewProduct'
 // import ButtonViewAll from '../Conponents/ButtonViewAll'
 // import Tailer from '../../Conponents/Tailer';
-import { Banner, ProductCategory } from '../../Conponents';
+import { Banner, ProductCategory, ProductList, History } from '../../Conponents';
 
 const Home = () => {
   return (
     <>
       <Banner/>
+      <History />
       <ProductCategory />
-      <Typography> Hello
+      <ProductList/>
         {/* <Welcome /> */}
         {/* <History />
         <TypeProduct />
         <ButtonViewAll />
         <DemoProduct />
         <ReviewProduct /> */}
-      </Typography>
     </>
 
   );
