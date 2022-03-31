@@ -6,10 +6,9 @@ export default makeStyles((theme) => ({
   },
   buttonLeftHis: {
     overflow: 'hidden',
-    transition: 'transform 2s',
     '& img': {
-      width: '200px',
-      height: '200px',
+      width: '100%',
+      transition: 'transform 2s',
       margin: '0 auto'
     },
     '& img:hover': {
