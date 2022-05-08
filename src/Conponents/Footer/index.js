@@ -30,9 +30,9 @@ const Footer = () => {
   ];
 
   const addressContact = [
-    {label: "Cầu Giấy, Hà Nội, Việt Nam", event: null, icon: <BusinessIcon className={classes.icon}/>},
-    {label: "+0364307871", event: null, icon: <PhoneIcon className={classes.icon}/>},
-    {label: "trongnghiafes@gmail.com", event: null, icon: <AlternateEmailIcon className={classes.icon}/>}
+    {label: "Nghệ An, Việt Nam", event: null, icon: <BusinessIcon className={classes.icon}/>},
+    {label: "+84969169260", event: null, icon: <PhoneIcon className={classes.icon}/>},
+    {label: "nhatphanho@gmail.com", event: null, icon: <AlternateEmailIcon className={classes.icon}/>}
   ];
 
   const socialMedia = [
@@ -45,7 +45,7 @@ const Footer = () => {
     <Box className={classes.footer}>
       <Grid container sx={{padding: 2}}>
         <Grid item md={3} sm={6} xs={12} sx={{marginBottom: {xs: 2}}}>
-          <Typography variant='h5'>NTNWINE Store</Typography>
+          <Typography variant='h5'>HNPWINE Store</Typography>
           <Typography variant='body1'>THE SMART CHOICE</Typography>
         </Grid>
 

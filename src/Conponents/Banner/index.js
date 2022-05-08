@@ -44,7 +44,7 @@ const Banner = () => {
     <Box className={classes.background} 
       sx={{backgroundImage: `url(${imageList[currentBannerIndex]?.imageLink})`, height: {md: 500, xs: 250}}}>
       <Box textAlign='center'>
-        <Typography variant='h4' className={classes.titleText}>NTNWINE</Typography>
+        <Typography variant='h4' className={classes.titleText}>HNPWINE</Typography>
         <Typography variant='h5' className={classes.titleText}>Sản phẩm của chúng tôi sẽ khiến bạn phải hài lòng</Typography>
         <Button className={classes.btn} onClick={() => history.push('/product')}
           sx={{backgroundColor: '#fff', padding: {md: `16px 32px`, sm: `8px 16px`}, borderRadius: 7, color: '#000', marginTop: 2,

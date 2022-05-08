@@ -9,6 +9,7 @@ urlpatterns = [
     path('detail-with-code/<str:product_code>', views.product_detail_with_code, name='product_detail_with_code'),
     path('product-detail', views.product_detail_with_id, name='product_detail_with_id'),
     path('product-category', views.get_all_category, name='product_category'),
+    path('register', views.register, name='register'),
     path('api-token-auth/', CustomAuthToken.as_view())
 
     # order

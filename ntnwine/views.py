@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from .models import Product, ProductCategory, Bill
 from rest_framework.decorators import api_view
-from .serializers import GetAllBillSerializer, GetAllProductSerializer, GetAllProductCategorySerializer
+from .serializers import GetAllBillSerializer, GetAllProductSerializer, GetAllProductCategorySerializer, GetAllUserSerializer
 from django.http import JsonResponse
 from rest_framework.response import Response
+
+from rest_framework import serializers
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
@@ -60,6 +63,20 @@ def get_all_category(request):
 def bill(request):
     orders = Bill.objects.all()
     serializer = GetAllBillSerializer(orders, many=True)
+    return Response(serializer.data)
+
+
+# create user
+@api_view(['POST'])
+def register(request):
+    user = User.objects.create_user(
+        username=request.data.get('username'),
+        password=request.data.get('password'),
+        first_name=request.data.get('fullname'),
+        email=request.data.get('email'),
+    )
+    serializer = GetAllUserSerializer(user)
+
     return Response(serializer.data)
 
 # # Get detail of product

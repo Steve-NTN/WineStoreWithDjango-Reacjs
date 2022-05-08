@@ -1,8 +1,10 @@
 from rest_framework import serializers
+
 from .models import Bill, Product, ProductCategory
 import os
 from django.http import HttpResponse, HttpResponseNotFound
 from django.views import View
+from django.contrib.auth.models import User
 
 class GetAllProductSerializer(serializers.ModelSerializer):
 
@@ -19,6 +21,11 @@ class GetAllProductCategorySerializer(serializers.ModelSerializer):
 class GetAllBillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bill
+        fields = '__all__'
+
+class GetAllUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
         fields = '__all__'
 
 

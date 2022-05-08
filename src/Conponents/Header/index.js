@@ -126,7 +126,7 @@ export default function Header() {
         <Toolbar disableGutters sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box>
             <Link to='/' style={{ color: '#fff', textDecoration: 'none' }}>
-              <Typography noWrap sx={{display: { xs: 'none', md: 'flex' }}}>NTNWINE STORE</Typography>
+              <Typography noWrap sx={{display: { xs: 'none', md: 'flex' }}}>HNPWINE STORE</Typography>
             </Link>
 
             <IconButton 

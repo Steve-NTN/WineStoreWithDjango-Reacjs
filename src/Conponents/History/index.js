@@ -45,7 +45,7 @@ const History = () => {
           </Typography>
 
           <Typography variant='h5'>
-            <CountUp end={15892} duration={30} /> người tin dùng
+            <CountUp end={15892} duration={4} /> người tin dùng
           </Typography>
         </Box>
       </Grid>
