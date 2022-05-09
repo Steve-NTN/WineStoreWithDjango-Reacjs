@@ -30,18 +30,20 @@ const History = () => {
 
       </Grid>
 
-      <Grid item md={6} xs={12} textAlign='center' justifyContent='space-around' 
+      <Grid item md={6} xs={12} textAlign='center' justifyContent='center' 
         sx={{display: 'flex', flexDirection: 'column'}}>
         <Typography variant='h5'>
         Thành lập năm <span style={{color: 'red'}}>2022</span>
         </Typography>
         <Box sx={{margin: 2}}>
-          <Typography>
+          <Typography sx={{marginTop: 2, marginBottom: 2, lineHeight: 1.5, textAlign: 'justify'}}>
+          <span style={{marginBottom: 2}}>
           Lịch sử rượu vang kéo dài hàng nghìn năm và gắn bó chặt chẽ với lịch sử nông nghiệp, ẩm thực, văn minh, loài người. 
           Bằng chứng khảo cổ sớm nhất cho thấy con người đã làm rượu vang tại Gruzia vào khoảng 6000 năm TCN.
-          </Typography>
-          <Typography sx={{marginTop: 2, marginBottom: 2}}>
+          </span>
           Rượu vang gắn liền với thần thoại về Dionysus/Bacchus, phổ biến ở La mã và Hy Lạp cổ đại,và nhiều vùng làm rượu vang chính ở Tây Âu ngày nay.
+          Trải qua 4 năm xây dựng và phát triển, Công ty với thương hiệu HNP đã và đang ngày càng không chỉ khẳng định được vị thế của mình trong lĩnh vực kinh doanh rượu tại thị trường Việt Nam mà còn trên thị trường quốc tế. Một hành trình phát triển liên tục không ngừng, 
+          Công ty đã gặt hái được nhiều thành tích đáng kể như tốc độ tăng trưởng kinh doanh đều đạt 150% so với năm trước, quy mô và đội ngũ nhân sự tăng trưởng mạnh, số lượng khách hàng tăng cao, hệ thống đối tác dịch vụ đa dạng và hợp tác chặt chẽ.
           </Typography>
 
           <Typography variant='h5'>

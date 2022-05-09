@@ -14,9 +14,9 @@ const Home = () => {
   return (
     <>
       <Banner/>
-      <History />
+      {/* <History />
       <ProductCategory />
-      <ProductList/>
+      <ProductList/> */}
         {/* <Welcome /> */}
         {/* <History />
         <TypeProduct />

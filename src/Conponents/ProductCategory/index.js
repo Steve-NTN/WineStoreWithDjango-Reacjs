@@ -8,6 +8,7 @@ import noImage from '../../assets/image/no-image.png';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../../actions/loadingAction';
 import Loading from '../Loading';
+import Dots from '../Dots';
 
 const ProductCategory = () => {
   const classes = useStyles();
@@ -57,6 +58,7 @@ const ProductCategory = () => {
           ))
         }
       </Grid>
+      <Dots num={4}/>
       <Loading/>
     </Box>
   );

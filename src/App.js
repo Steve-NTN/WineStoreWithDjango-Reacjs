@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router,Route, Switch, useHistory } from 'react-router-dom';
-import {Header, Footer} from './Conponents';
+import {Header} from './Conponents';
 // import {theme} from "./utils/styles/theme";
 import theme from './theme';
 import { ThemeProvider } from '@mui/material/styles';
-import {Home, Login, Product, Cart, Register} from './pages';
+import {Home, Login, Product, Cart, Register, About, Contact} from './pages';
 // import './App.css';
 import axios from 'axios';
 
@@ -26,11 +26,9 @@ const App = () => {
           <Route path="/product" exact component={Product} />
           <Route path="/product/:productId" component={Product} />
           <Route path="/cart" component={Cart} />
-          
-          {/* <Route path="/viewproduct" exact component={ViewProduct} />
-          <Route path="/about" exact component={About} /> */}
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
         </Switch>
-        <Footer/>
       </Router>
     </ThemeProvider>
   )

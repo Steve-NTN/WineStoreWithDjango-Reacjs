@@ -1,12 +1,12 @@
 {
-  "name": "ntnwine",
+  "name": "hnpwine",
   "homepage": ".",
   "proxy": "http://localhost:8000",
   "version": "0.1.0",
   "private": true,
   "author": {
-    "name": "NTN",
-    "email": "trongnghiafes@gmail.com"
+    "name": "HNP",
+    "email": "thaixuanphan@gmail.com"
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",

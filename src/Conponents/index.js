@@ -12,3 +12,4 @@ export { default as ProductList } from "./ProductList";
 export { default as ProductDetail } from "./ProductDetail";
 export { default as Loading } from "./Loading";
 export { default as History } from "./History";
+export { default as Dots } from "./Dots";

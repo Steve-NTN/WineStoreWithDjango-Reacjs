@@ -1,17 +1,17 @@
 import React,{ } from 'react';
 // import axios from 'axios';
-import { NeedLogin } from '../../Conponents';
+import { NeedLogin, Footer } from '../../Conponents';
 import { useSelector } from 'react-redux';
 import {
   Box,Table,TableCell,TableContainer,
   TableHead,TableRow,Typography,
-  TableBody, Paper
+  TableBody, Paper, IconButton
 } from '@mui/material';
-
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 const Cart = () => {
   const token = useSelector((state) => state.userReducer.token);
 
-  console.log("token",token)
   function createData(name,calories,fat,carbs,protein) {
     return { name,calories,fat,carbs,protein };
   }
@@ -82,10 +82,12 @@ const Cart = () => {
                       <TableCell component="th" scope="row">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell>{row.calories}</TableCell>
+                      <TableCell>{row.fat}</TableCell>
+                      <TableCell>{row.carbs}</TableCell>
+                      <TableCell>
+                        <UpdateBox index={row?.name}/>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -108,9 +110,26 @@ const Cart = () => {
 
         )
       }
+      <Footer />
     </>
 
   )
 };
+
+const UpdateBox = ({index}) => {
+  return (
+    <Box display='flex' justifyContent={'center'} alignItems='center'>
+      <IconButton>
+        <AddIcon />
+      </IconButton>
+      <Typography>
+      {1}
+      </Typography>
+      <IconButton>
+        <RemoveIcon />
+      </IconButton>
+    </Box>
+  )
+}
 
 export default Cart;

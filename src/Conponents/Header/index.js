@@ -46,7 +46,7 @@ export default function Header() {
     {label: "Trang chủ", link: "/", icon: null},
     {label: "Sản phẩm", link: "/product", icon: null},
     {label: "Liên hệ", link: "/contact", icon: null},
-    {label: "Giới thiệu", link: "/", icon: null},
+    {label: "Giới thiệu", link: "/about", icon: null},
     {label: "", link: "/cart", icon: 
       <StyledBadge badgeContent={4} color="secondary">
         <ShoppingCartIcon />

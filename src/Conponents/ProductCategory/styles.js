@@ -1,4 +1,5 @@
 import { makeStyles } from '@mui/styles';
+import { padding } from '@mui/system';
 
 export default makeStyles((theme) => ({
   categoryImg: {
@@ -17,8 +18,8 @@ export default makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'column !important'
-
+    flexDirection: 'column !important',
+    paddingBottom: 32
   },
   categoryName: {
     textDecoration: 'none',

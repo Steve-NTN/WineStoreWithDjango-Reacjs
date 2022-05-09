@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { setLoading } from '../../actions/loadingAction';
 import Loading from '../Loading';
 import noImage from '../../assets/image/no-image.png';
+import Dots from '../Dots';
 
 const ProductList = () => {
   const classes = useStyles();
@@ -115,6 +116,7 @@ const ProductList = () => {
             </Grid>
           ))
         }
+        <Dots num={4}/>
         {
           openProductDetail && (
             <ProductDetail 
