@@ -66,7 +66,7 @@ const ProductList = () => {
 
   return (
     <>
-      <Typography variant='h5' sx={{fontWeight: 600}} align='center'>
+      <Typography variant='h5' sx={{fontWeight: 600}} align='center' my={7}>
         Sản phẩm của chúng tôi
       </Typography>
 

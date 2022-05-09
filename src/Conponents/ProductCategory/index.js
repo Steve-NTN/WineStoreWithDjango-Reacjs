@@ -32,11 +32,11 @@ const ProductCategory = () => {
   return (
     <Box my={4}>
       <Typography variant='h5' sx={{fontWeight: 600}} align='center'>
-        Loại rượu chúng tôi có
+        Có nhiều thương hiệu rượu nổi tiếng
       </Typography>
 
 
-      <Grid container sx={{marginTop: 2}}>
+      <Grid container sx={{marginTop: 6}}>
         {
           data && data.map((category, index) => (
             <Grid md={3} sm={4} xs={6} item key={index} className={classes.categoryCard}>
