@@ -11,3 +11,11 @@ export const addCart = (product) => {
     payload: product
   }
 }
+
+
+export const resetCart = (product) => {
+  return {
+    type: "RESET_CART",
+    payload: product
+  }
+}

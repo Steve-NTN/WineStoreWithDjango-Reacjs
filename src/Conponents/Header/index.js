@@ -14,6 +14,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import useStyles from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../actions/userAction';
+import { resetCart } from '../../actions/cartAction';
 
 export default function Header() {
   const history = useHistory();
@@ -67,6 +68,7 @@ export default function Header() {
     dispatch(setUser({
       token: null, phone: null, first_name: null, email: null
     }));
+    dispatch(resetCart());
     history.push('/login');
   };
   

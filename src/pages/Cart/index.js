@@ -5,18 +5,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   Box,Table,TableCell,TableContainer,
   TableHead,TableRow,Typography,
-  TableBody, Paper, IconButton
+  TableBody, Paper, IconButton, Button,
+  Dialog, DialogContent
 } from '@mui/material';
 import configs from '../../configs';
 import { reduceCart, addCart } from '../../actions/cartAction';
-
-
+import validateCommon from '../../validate/validateCommon'
 import noImage from '../../assets/image/no-image.png';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 const Cart = () => {
   const token = useSelector((state) => state.userReducer.token);
   const cart = useSelector((state) => state.cartReducer.Carts);
+  const [openDia, setOpenDia] = useState(false);
+  const [diaContent, setdiaContent] = useState();
+  
+  const getTotal = () => {
+    let total = 0;
+    cart?.map((c) => {
+      total += c?.quantity * c?.product_price
+    })
+    return total
+  };
 
   console.log(cart)
 
@@ -58,7 +68,7 @@ const Cart = () => {
           <Box my={4} mx={{md: 2, xs: 1}} minHeight='50vh' textAlign='center'>
           {
             cart.length < 1? (
-              <Typography variant='h5'>Giỏ hàng của tôi</Typography>
+              <Typography variant='h5'>Giỏ hàng đang trống. Vui lòng chọn sản phẩm.</Typography>
 
             ) : (
               <>
@@ -69,7 +79,7 @@ const Cart = () => {
                       <TableRow sx={{'& p': {fontWeight: 600}}}>
                         <TableCell>Sản phẩm</TableCell>
                         <TableCell>Giá</TableCell>
-                        <TableCell>Số lượng</TableCell>
+                        <TableCell align='center'>Số lượng</TableCell>
                         <TableCell>Tổng</TableCell>
                       </TableRow>
                     </TableHead>
@@ -81,46 +91,89 @@ const Cart = () => {
                         >
                           <TableCell component="th" scope="row">
                             <Box display='flex'>
-                              <img src={row?.product_image ? `${configs.DOMAIN_MEDIA}${row?.product_image}`: noImage}/>
                               {row?.product_name}
                             </Box>
                           </TableCell>
-                          <TableCell>{row.product_price}</TableCell>
+                          <TableCell>{validateCommon(row.product_price, 'money')}</TableCell>
                           <TableCell>
                             <UpdateBox row={row} cart={cart}/>
                           </TableCell>
-                          <TableCell>{row.product_price * row.quantity}</TableCell>
+                          <TableCell>{validateCommon(`${(row.product_price * row.quantity)}`, 'money')}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
+                <Box my={4} textAlign='right'>
+                  <Typography variant='h5' style={{fontWeight: 600}}>
+                    Tổng tiền: <span>{validateCommon(getTotal(), 'money')}</span>
+                  </Typography>
+                  <Button onClick={() => {
+                    setdiaContent(
+                      <ConfirmForm accept={() => setdiaContent(<SuccessfulForm />)} close={() => setOpenDia(false)}/>
+                    );
+                    setOpenDia(true);
+                  }} sx={{
+                      mt: 2,
+                      backgroundColor: '#000',
+                      color: '#fff',
+                      p: 2,
+                      '&:hover': {
+                        backgroundColor: '#000',
+
+                      }
+                    }}>
+                    Thanh toán
+                  </Button>
+                </Box>
               </>
 
             )
           }
 
-            {/* <section className="cart-total">
-              <div className="container">
-                <h2 style={{ cursor: 'pointer' }}>Tổng tiền</h2>
-                <p id="sum-total"></p>
-              </div>
-              <div className='container'>
-                <div className="row" style={{ textAlign: 'center' }} data-aos="zoom-in" data-aos-delay="200">
-                  <button className="btn post-btn btn-view-all">Thanh toán</button>
-                </div>
-              </div>
-            </section> */}
-            {/* <BonusAbout /> */}
           </Box>
 
         )
       }
+      <Dialog open={openDia} onClose={() => setOpenDia(false)}>
+        <DialogContent>
+          {diaContent}
+        </DialogContent>
+      </Dialog>
       <Footer />
     </>
 
   )
 };
+
+const ConfirmForm = ({accept, close}) => {
+  return (
+    <>
+      <Typography variant='h5' fontWeight={600} align='center'>
+        Đồng ý thanh toán
+      </Typography>
+
+      <Box display='flex' mt={3} justifyContent='space-between'>
+        <Button sx={{color: 'green'}} onClick={accept}>
+          Đồng ý
+        </Button>
+        <Button sx={{color: 'red'}} onClick={close}>
+          Hủy bỏ
+        </Button>
+      </Box>
+    </>
+  )
+}
+
+const SuccessfulForm = () => {
+  return (
+    <>
+      <Typography variant='h5' fontWeight={600} align='center'>
+        Đang chờ cửa hàng xác nhận thông tin
+      </Typography>
+    </>
+  )
+}
 
 const UpdateBox = ({row, cart}) => {
   const dispatch = useDispatch();

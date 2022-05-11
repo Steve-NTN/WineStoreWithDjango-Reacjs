@@ -25,7 +25,7 @@ const History = () => {
           <img src={leftHis} alt='leftHis'/>
         </Button>
         <Typography variant='body1'>
-        Hình ảnh của xưởng được chụp 10 tháng 10 năm 2020
+        Hình ảnh của xưởng được chụp 10 tháng 10 năm 2018
         </Typography>
 
       </Grid>
@@ -33,7 +33,7 @@ const History = () => {
       <Grid item md={6} xs={12} textAlign='center' justifyContent='center' 
         sx={{display: 'flex', flexDirection: 'column'}}>
         <Typography variant='h5'>
-        Thành lập năm <span style={{color: 'red'}}>2022</span>
+        Thành lập năm <span style={{color: 'red'}}>2018</span>
         </Typography>
         <Box sx={{margin: 2}}>
           <Typography sx={{marginTop: 2, marginBottom: 2, lineHeight: 1.5, textAlign: 'justify'}}>

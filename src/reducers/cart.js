@@ -47,6 +47,13 @@ const cartReducer = (state = initialState, action) => {
           ...state
         }
 
+      case 'RESET_CART':
+        state.Carts = [];
+        state.numberCart = 0;
+        return {
+          ...state
+        }
+
     default:
     return state
   }
