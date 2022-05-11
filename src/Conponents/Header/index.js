@@ -21,6 +21,7 @@ export default function Header() {
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer);
+  const numberCart = useSelector((state) => state.cartReducer.numberCart);
   const [showLeftTogger, setShowLeftTogger] = useState(false);
   const [showUserOption, setShowUserOption] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -29,7 +30,8 @@ export default function Header() {
     '& .MuiBadge-badge': {
       right: -3,
       top: 13,
-      padding: '0 4px'
+      padding: '0 4px',
+      backgroundColor: 'red'
     },
     '& button': {
       minWidth: 'auto',
@@ -48,7 +50,7 @@ export default function Header() {
     {label: "Liên hệ", link: "/contact", icon: null},
     {label: "Giới thiệu", link: "/about", icon: null},
     {label: "", link: "/cart", icon: 
-      <StyledBadge badgeContent={4} color="secondary">
+      <StyledBadge badgeContent={numberCart} color="secondary">
         <ShoppingCartIcon />
       </StyledBadge>
     }

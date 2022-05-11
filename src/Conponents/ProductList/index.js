@@ -7,11 +7,13 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import apiTemplate from '../../api';
 import configs from '../../configs';
 import ProductDetail from '../ProductDetail';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { reduceCart, addCart } from '../../actions/cartAction';
 import { setLoading } from '../../actions/loadingAction';
 import Loading from '../Loading';
 import noImage from '../../assets/image/no-image.png';
 import Dots from '../Dots';
+import { useHistory } from 'react-router-dom';
 
 const ProductList = () => {
   const classes = useStyles();
@@ -20,14 +22,25 @@ const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [productList, setProductList] = useState([]);
   const [openProductDetail, setOpenProductDetail] = useState(false);
+  const cart = useSelector((state) => state.cartReducer);
+  const user = useSelector((state) => state.userReducer);
+  const history = useHistory();
+
+  console.log(cart)
+
   const handleViewProduct = () => {
     setOpenProductDetail(true);
   };
   const handleLikeProduct = () => {
     console.log("Like");
   };
-  const handleBuyProduct = () => {
-    console.log('Buy product');
+  const handleBuyProduct = (product) => {
+    if(!user?.token) {
+      history.push('/login');
+    } else {
+      dispatch(addCart(product));
+    }
+
   };
   const options = [
     {label: 'Xem chi tiết sản phẩm', icon: <VisibilityIcon/>, event: handleViewProduct},
@@ -102,7 +115,7 @@ const ProductList = () => {
                   {
                     options.map((option, index) => (
                       <Grid item xs={4} key={index} className={classes.option}>
-                        <div className={classes.optionBtn} onClick={option?.event} 
+                        <div className={classes.optionBtn} onClick={() => option?.event(product)} 
                           sx={{color: '#fff', backgroundColor: '#121212', minWidth: 45,
                           '&:hover': {backgroundColor: '#121212', color: '#ddd'}}}
                         >

@@ -42,7 +42,7 @@ const Banner = () => {
 
   return (
     <Box className={classes.background} 
-      sx={{backgroundImage: `url(${imageList[currentBannerIndex]?.imageLink})`, height: {md: 'calc(100vh - 72px)', xs: 250}}}>
+      sx={{backgroundImage: `url(${imageList[currentBannerIndex]?.imageLink})`, height: {md: 'calc(100vh - 72px)', xs: 'calc(100vh - 56px)'}}}>
       <Box textAlign='center'>
         <Typography variant='h4' className={classes.titleText}>HNPWINE</Typography>
         <Typography variant='h5' className={classes.titleText}>Sản phẩm của chúng tôi sẽ khiến bạn hài lòng</Typography>
