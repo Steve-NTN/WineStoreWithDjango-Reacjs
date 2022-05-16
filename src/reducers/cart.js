@@ -20,6 +20,8 @@ const cartReducer = (state = initialState, action) => {
         state.Carts = state.Carts.filter((s) => s.quantity > 0);
         state.numberCart = state.Carts.length;
       }
+      localStorage.setItem('carts', JSON.stringify(state.Carts));
+
       return {
         ...state
       }
@@ -43,6 +45,8 @@ const cartReducer = (state = initialState, action) => {
 
         state.Carts = state.Carts.filter((s) => s.quantity > 0);
         state.numberCart = state.Carts.length;
+        localStorage.setItem('carts', JSON.stringify(state.Carts));
+
         return {
           ...state
         }
@@ -50,6 +54,8 @@ const cartReducer = (state = initialState, action) => {
       case 'RESET_CART':
         state.Carts = [];
         state.numberCart = 0;
+        localStorage.setItem('carts', JSON.stringify(state.Carts));
+
         return {
           ...state
         }

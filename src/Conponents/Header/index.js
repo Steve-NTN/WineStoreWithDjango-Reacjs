@@ -19,9 +19,9 @@ import { resetCart } from '../../actions/cartAction';
 export default function Header() {
   const history = useHistory();
   const classes = useStyles();
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userReducer);
+  const user = JSON.parse(localStorage.getItem('user'));
   const numberCart = useSelector((state) => state.cartReducer.numberCart);
   const [showLeftTogger, setShowLeftTogger] = useState(false);
   const [showUserOption, setShowUserOption] = useState(false);
@@ -61,20 +61,23 @@ export default function Header() {
   };
 
   const opendRegisterForm = () => {
-    console.log("register");
+    history.push('/register');
   };
 
   const clickLogout = () => {
     dispatch(setUser({
       token: null, phone: null, first_name: null, email: null
     }));
+    localStorage.removeItem('user');
     dispatch(resetCart());
     history.push('/login');
   };
+
+  console.log(user)
   
   const userOptions = [
-    {label: "Đăng nhập", event: opendLoginForm, icon: <PersonIcon className={classes.icon}/>, hidden: false},
-    {label: "Đăng ký", event: opendRegisterForm, icon: <PersonAddIcon className={classes.icon}/>, hidden: (user? true: false) },
+    {label: "Đăng nhập", event: opendLoginForm, icon: <PersonIcon className={classes.icon}/>, hidden: (user? true: false)},
+    {label: "Đăng ký", event: opendRegisterForm, icon: <PersonAddIcon className={classes.icon}/>, hidden: (user? false: true) },
     {label: "Đăng xuất", event: clickLogout, icon: <LogoutIcon className={classes.icon}/>, hidden: (user? false: true)}
   ];
 

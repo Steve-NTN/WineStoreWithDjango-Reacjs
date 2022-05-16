@@ -32,6 +32,7 @@ const LoginForm = () => {
     await apiTemplate('/api-token-auth/', 'POST', account, (res)=> {
       dispatch(setUser(res));
       dispatch(setLoading({open: false}));
+      localStorage.setItem('user', JSON.stringify(res));
 
       if(res.token){
         history.push('/');

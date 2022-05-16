@@ -14,6 +14,7 @@ import validateCommon from '../../validate/validateCommon'
 import noImage from '../../assets/image/no-image.png';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import ConfirmForm from './components/ConfirmForm';
 const Cart = () => {
   const token = useSelector((state) => state.userReducer.token);
   const cart = useSelector((state) => state.cartReducer.Carts);
@@ -30,33 +31,6 @@ const Cart = () => {
 
   console.log(cart)
 
-  // componentDidMount() {
-  //     axios.get(`http://localhost:8000/order/order-by-user/${localStorage.getItem("token")}`)
-  //         .then(res => {
-  //             this.setState({
-  //                 orders: res.data,
-  //             });
-  //             if(this.state.orders) {
-  //                 document.getElementById("selected-quantity").innerHTML = this.state.orders.length
-  //             }
-  //         })
-  // }
-
-  // remove = (productId) =>{  
-  //     axios.delete(`http://localhost:8000/order/delete-selected/${localStorage.getItem("token")}/${productId}`)
-  //         .then(res => {
-
-  //         }).catch(console.error)
-  //     const productCopy = this.state.orders.filter((row) => row.product !== productId);
-  //     this.setState({orders: productCopy});
-  //     document.getElementById("selected-quantity").innerHTML = parseInt(document.getElementById("selected-quantity").innerHTML) - 1
-  // };
-
-  // clickPay = () =>{
-
-  //     alert("Xử lí thanh toán")
-  // }
-
   return (
     <>
       {
@@ -65,7 +39,9 @@ const Cart = () => {
             <NeedLogin />
           </>
         ) : (
-          <Box my={4} mx={{md: 2, xs: 1}} minHeight='50vh' textAlign='center'>
+          <Box my={4} mx={{md: 2, xs: 1}} minHeight='calc(100vh - 264px)' textAlign='center'
+            display={cart.length < 1? 'flex': 'block'} alignItems='center' justifyContent={'center'}
+          >
           {
             cart.length < 1? (
               <Typography variant='h5'>Giỏ hàng đang trống. Vui lòng chọn sản phẩm.</Typography>
@@ -110,7 +86,11 @@ const Cart = () => {
                   </Typography>
                   <Button onClick={() => {
                     setdiaContent(
-                      <ConfirmForm accept={() => setdiaContent(<SuccessfulForm />)} close={() => setOpenDia(false)}/>
+                      <ConfirmForm 
+                        setdiaContent={(x) => setdiaContent(x)}
+                        accept={() => setdiaContent(<SuccessfulForm />)} 
+                        close={() => setOpenDia(false)}
+                      />
                     );
                     setOpenDia(true);
                   }} sx={{
@@ -135,7 +115,13 @@ const Cart = () => {
 
         )
       }
-      <Dialog open={openDia} onClose={() => setOpenDia(false)}>
+      <Dialog open={openDia} onClose={() => setOpenDia(false)}
+        sx={{
+          '& .MuiPaper-root': {
+            width: '85%'
+          }
+        }}
+      >
         <DialogContent>
           {diaContent}
         </DialogContent>
@@ -145,25 +131,6 @@ const Cart = () => {
 
   )
 };
-
-const ConfirmForm = ({accept, close}) => {
-  return (
-    <>
-      <Typography variant='h5' fontWeight={600} align='center'>
-        Đồng ý thanh toán
-      </Typography>
-
-      <Box display='flex' mt={3} justifyContent='space-between'>
-        <Button sx={{color: 'green'}} onClick={accept}>
-          Đồng ý
-        </Button>
-        <Button sx={{color: 'red'}} onClick={close}>
-          Hủy bỏ
-        </Button>
-      </Box>
-    </>
-  )
-}
 
 const SuccessfulForm = () => {
   return (

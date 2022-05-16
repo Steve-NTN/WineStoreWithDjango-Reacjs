@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from .models import Product, ProductCategory, Bill
+from .models import BillOrder, Product, ProductCategory, Bill, ProductStock
 from rest_framework.decorators import api_view
-from .serializers import GetAllBillSerializer, GetAllProductSerializer, GetAllProductCategorySerializer, GetAllUserSerializer
+from .serializers import GetAllBillSerializer, GetAllProductSerializer, GetAllProductCategorySerializer, GetAllUserSerializer, GetAllBillSerializer
 from django.http import JsonResponse
 from rest_framework.response import Response
-
-from rest_framework import serializers
+from django.db import transaction
+from rest_framework import serializers, status
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+import datetime
 
 # Create your views here.
 def home(request):
@@ -84,28 +86,55 @@ def register(request):
 # def order_by_user(request, token):
 #     orders = Order.objects.filter(token=token)
 #     serializer = GetAllOrderSerializer(orders, many=True)
-#     return Response(serializer.data)
+#     return Response(serializer.data)  
 
 # # Add product to cart
-# @api_view(['POST'])
-# def buy_product(request):
-#     data = request.data.copy()
-#     product = Product.objects.filter(product_id=data['product'])
-#     token = Token.objects.filter(key=data['token'])
-#     checkOrder = Order.objects.filter(token=token[0], product=product[0])
-#     quantity = 0
-#     if(len(checkOrder) == 0):
-#         order = Order.objects.create(token=token[0], 
-#         quantity=1, product=product[0])
-#         quantity = 1
-#         order.save()
-#     else:
-#         order = Order.objects.get(token=token[0], product=product[0])
-#         order.quantity += 1
-#         quantity += 1
-#         order.save()
+@transaction.atomic
+@api_view(['POST'])
+def create_order(request):
+    try:
+        data = request.data.copy()
+        # check user
+        with transaction.atomic():
+            token = Token.objects.get(key=data.get('token'))
+            user = token.user
+            if not user:
+                return Response(data='User not found', status=status.HTTP_404_NOT_FOUND)
 
-#     return Response(quantity, status=status.HTTP_201_CREATED)
+            # create order
+            new_order = Bill.objects.create(
+                created_date=datetime.datetime.now(),
+                user_id=user,
+                username=data.get('username'),
+                phone_number=data.get('phone_number'),
+                ship_address=data.get('ship_address'),
+                total=data.get('total') or 0
+            )
+
+            # create order products
+            if not data.get('products') or len(data.get('products')) <= 0:
+                return Response(data='Order products not valid', status=status.HTTP_409_CONFLICT)
+
+            for product in data.get('products'):
+                try:
+                    crt_qlt = ProductStock.objects.get(product_id=product.get('product_id'))
+                except Exception:
+                    crt_qlt = None
+
+                if crt_qlt:
+                    new_product = BillOrder.objects.create(
+                        bill_id=new_order,
+                        product_id=Product.objects.get(product_id=product.get('product_id')),
+                        quantity=product.get('quantity')
+                    )
+                    crt_qlt.quantity_in_stock = crt_qlt.quantity_in_stock - product.get('quantity')
+                    crt_qlt.save()
+            serializer = GetAllBillSerializer(new_order)
+        return Response(serializer.data)
+    except Exception as e:
+        transaction.set_rollback(True)
+        Response(e, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        raise
 
 # # Delete product from cart
 # @api_view(['DELETE'])
