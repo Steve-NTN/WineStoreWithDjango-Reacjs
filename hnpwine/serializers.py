@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Bill, Product, ProductCategory
+from .models import Bill, Product, ProductCategory, ProductStock
 import os
 from django.http import HttpResponse, HttpResponseNotFound
 from django.views import View
@@ -28,6 +28,10 @@ class GetAllUserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+class GetAllStockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductStock
+        fields = ['product_id', 'quantity_in_stock']
 
 # Add this CBV
 class Assets(View):

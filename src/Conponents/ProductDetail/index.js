@@ -29,17 +29,6 @@ const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
     getData();
   }, [product, dispatch]);
 
-  // const getData = () => {
-  //   console.log(product, 'hello')
-  //   apiTemplate('/product/product-detail', 'POST', {product_id: product?.product_id}, (res)=> {
-  //     setproductDetail(res);
-  //     console.log(res);
-  //   }, (error) => {
-  //     console.log(error)
-  //   })
-  // };
-  // getData();
-
   console.log(product, data)
 
   return (

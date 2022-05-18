@@ -5,7 +5,7 @@ import useStyles from './styles';
 
 const CustomInput = ({
   variant="outlined", fullWidth=true, width, InputProps, type,
-  getValue, required
+  getValue, required, att
 }) => {
   const classes = useStyles();
 
@@ -16,7 +16,7 @@ const CustomInput = ({
   return ( 
     <TextField className={classes.roundInput} variant={variant} type={type} 
     InputProps={InputProps} onChange={changeInput} required={required}
-    sx={{width: width}}
+    sx={{width: width, ...att}}
     />
   );
 }

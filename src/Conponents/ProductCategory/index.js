@@ -1,4 +1,6 @@
-import { Box, Grid, Typography, IconButton } from '@mui/material';
+import { Box, Grid, Typography, IconButton,
+  CircularProgress, Pagination
+} from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import useStyles from './styles';
 import { Link } from 'react-router-dom';
@@ -7,28 +9,37 @@ import configs from '../../configs';
 import noImage from '../../assets/image/no-image.png';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../../actions/loadingAction';
-import Loading from '../Loading';
-import Dots from '../Dots';
 
 const ProductCategory = () => {
   const classes = useStyles();
+  const [showLoading, setshowLoading] = useState(true);
   const [data, setData] = useState(null);
   const dispatch = useDispatch();
+  const [ProductCategory, setProductCategory] = useState({
+    page_index: 0,
+    page_size: 8
+  });
+  const handleChangePagination = (e, value) => {
+    setProductCategory({...ProductCategory, page_index: value - 1});
+  };
 
   useEffect(() =>  {
-    dispatch(setLoading({open: true}));
+    setshowLoading(true);
+
     const getData = async () => {
-      await apiTemplate('/product-category', null, null, (res)=> {
+      await apiTemplate('/categories', 'POST', ProductCategory, (res)=> {
         setData(res);
         console.log(res);
-        dispatch(setLoading({open: false}));
+        setshowLoading(false);
+
       }, (error) => {
         console.log(error);
-        dispatch(setLoading({open: false}));
+        setshowLoading(false);
+
       })
     };
     getData();
-  }, [dispatch]);
+  }, [ProductCategory, dispatch]);
 
   return (
     <Box my={4}>
@@ -36,30 +47,39 @@ const ProductCategory = () => {
         Có nhiều thương hiệu rượu nổi tiếng
       </Typography>
 
+      {
+        showLoading ? (
+          <Box my={6} textAlign='center'>
+            <CircularProgress sx={{color: '#000'}}/>
+          </Box>
+        ) : (
+          <Grid container sx={{marginTop: 6}}>
+            {
+              data && data?.categories.map((category, index) => (
+                <Grid md={3} sm={4} xs={6} item key={index} className={classes.categoryCard}>
+                  <IconButton className={classes.categoryImg} sx={{
+                    backgroundImage: `url(${category.product_category_image? `${configs.DOMAIN_MEDIA}${category.product_category_image}`: noImage})`
+                  }}>
+                    <Box >
 
-      <Grid container sx={{marginTop: 6}}>
-        {
-          data && data.map((category, index) => (
-            <Grid md={3} sm={4} xs={6} item key={index} className={classes.categoryCard}>
-              <IconButton className={classes.categoryImg} sx={{
-                backgroundImage: `url(${category.product_category_image? `${configs.DOMAIN_MEDIA}${category.product_category_image}`: noImage})`
-              }}>
-                <Box >
-
-                </Box>
-              </IconButton>
-              <Link className={classes.categoryName} to={`/${category?.product_category_name}`}>
-                {category?.product_category_name}
-              </Link>
-              <Typography variant='body2'>
-                {category?.product_category_org}
-              </Typography>
-            </Grid>
-          ))
-        }
-      </Grid>
-      <Dots num={4}/>
-      <Loading/>
+                    </Box>
+                  </IconButton>
+                  <Link className={classes.categoryName} to={`/${category?.product_category_name}`}>
+                    {category?.product_category_name}
+                  </Link>
+                  <Typography variant='body2'>
+                    {category?.product_category_org}
+                  </Typography>
+                </Grid>
+              ))
+            }
+          </Grid>
+        )
+      }
+      <Box spacing={2} my={3} display='flex' justifyContent={'center'}>
+        <Pagination count={Math.ceil(data?.quantity / ProductCategory?.page_size)} 
+          page={ProductCategory?.page_index + 1} onChange={handleChangePagination} />
+      </Box>
     </Box>
   );
 }

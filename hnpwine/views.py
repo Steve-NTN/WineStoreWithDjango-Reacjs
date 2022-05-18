@@ -1,7 +1,11 @@
+from unittest import result
 from django.shortcuts import render
 from .models import BillOrder, Product, ProductCategory, Bill, ProductStock
 from rest_framework.decorators import api_view
-from .serializers import GetAllBillSerializer, GetAllProductSerializer, GetAllProductCategorySerializer, GetAllUserSerializer, GetAllBillSerializer
+from .serializers import (
+    GetAllBillSerializer, GetAllProductSerializer, GetAllProductCategorySerializer, 
+    GetAllUserSerializer, GetAllBillSerializer, GetAllStockSerializer
+)
 from django.http import JsonResponse
 from rest_framework.response import Response
 from django.db import transaction
@@ -9,6 +13,8 @@ from rest_framework import serializers, status
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 import datetime
+import math 
+from django.core import serializers
 
 # Create your views here.
 def home(request):
@@ -17,25 +23,45 @@ def home(request):
     return render(request, 'product/index.html', context)
 
 # Get all of product
-@api_view(['GET'])
-def products(request):
-    products = Product.objects.all()
-    serializer = GetAllProductSerializer(products, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def products(request):
+#     products = Product.objects.all()
+#     serializer = GetAllProductSerializer(products, many=True)
+#     return Response(serializer.data)
 
 # Get limit 5 first product
-@api_view(['GET'])
-def products_a_page(request, index_page):
-    index_page = int(index_page)
-    start = (index_page - 1) * 8
-    end = (index_page - 1) * 8 + 8
-    products = Product.objects.all()[start:end]
-    quantity = Product.objects.all().count()
-    serializer = GetAllProductSerializer(products, many=True)
-    res_data = {}
-    res_data['quantity'] = quantity
-    res_data['products'] = serializer.data
-    return JsonResponse(res_data)
+@api_view(['POST'])
+def products(request):
+    try:
+        data = request.data.copy()
+        all_products = (Product.objects.filter(product_name__contains=data.get('search_key')) 
+            if data.get('search_key') else Product.objects.all()
+        )
+        all_products = GetAllProductSerializer(all_products.values(), many=True).data
+        total_quantity = len(all_products)
+        page_size, page_index = int(data.get('page_size')), int(data.get('page_index'))
+        start = page_index * page_size
+        end = (page_index + 1) * page_size
+        products = all_products[start: end]
+
+        for index, product in enumerate(products):
+            products[index].setdefault('qlt_in_stock', get_qlt_in_stock(product.get('product_id')))
+
+        return JsonResponse({
+            'quantity': total_quantity,
+            'products': products
+        })
+    except Exception as e:
+        Response(e, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        raise
+
+
+def get_qlt_in_stock(product_id):
+    try:
+        stock = ProductStock.objects.get(product_id=product_id)
+        return stock.quantity_in_stock
+    except Exception as e:
+        return 0
 
 # Get detail of product
 @api_view(['GET'])
@@ -54,11 +80,20 @@ def product_detail_with_id(request):
 
 
 # Get all of product category
-@api_view(['GET'])
-def get_all_category(request):
-    product_categories = ProductCategory.objects.all()
+@api_view(['POST'])
+def categories(request):
+    data = request.data.copy()
+    all_products = ProductCategory.objects.all()
+    total_quantity = len(all_products)
+    page_size, page_index = int(data.get('page_size')), int(data.get('page_index'))
+    start = page_index * page_size
+    end = (page_index + 1) * page_size
+    product_categories = all_products[start: end]
     serializer = GetAllProductCategorySerializer(product_categories, many=True)
-    return Response(serializer.data)
+    return JsonResponse({
+        'quantity': total_quantity,
+        'categories': serializer.data
+    })
 
 # Create your views here.
 @api_view(['GET'])
