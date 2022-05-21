@@ -11,12 +11,10 @@ import configs from '../../configs';
 import ProductDetail from '../ProductDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduceCart, addCart } from '../../actions/cartAction';
-import Loading from '../Loading';
 import noImage from '../../assets/image/no-image.png';
 import { useHistory } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import CustomInput from '../CustomInput';
-import CustomDialog from '../CustomDialog';
 import SearchIcon from '@mui/icons-material/Search';
 
 const ProductList = () => {
@@ -28,6 +26,8 @@ const ProductList = () => {
     quantity: 0,
     products: []
   });
+
+  console.log(data)
   const [productFilter, setproductFilter] = useState({
     page_index: 0,
     page_size: 16,
@@ -75,6 +75,7 @@ const ProductList = () => {
       await apiTemplate('/products', 'POST', productFilter, (res)=> {
         setData(res);
         setshowLoading(false);
+        console.log(res)
       }, (error) => {
         console.log(error);
         setshowLoading(false);
@@ -155,13 +156,15 @@ const ProductList = () => {
                             {
                               options.map((option, index) => (
                                 <Grid item xs={4} key={index} className={classes.option}>
-                                  <div className={classes.optionBtn} onClick={() => option?.event(product)} 
-                                    sx={{color: '#fff', backgroundColor: '#121212', minWidth: 45,
-                                    '&:hover': {backgroundColor: '#121212', color: '#ddd', 
-                                    opacity: option?.canBlur? (product?.qlt_in_stock > 0? 1: 0.5): 1}}}
+                                  <Box className={classes.optionBtn} onClick={() => option?.event(product)} 
+                                    sx={{
+                                      color: '#fff', backgroundColor: '#121212', minWidth: 45,
+                                      '&:hover': {backgroundColor: '#121212', color: '#ddd'}, 
+                                      opacity: option?.canBlur? (product?.qlt_in_stock > 0? 1: 0.5): 1
+                                    }}
                                   >
                                   {option.icon}
-                                  </div>
+                                  </Box>
                                 </Grid>
                               ))
                             }

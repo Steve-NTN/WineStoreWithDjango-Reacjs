@@ -93,7 +93,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
-    'https://ntnwine.herokuapp.com',
+    'https://hnpwine.herokuapp.com',
     'http://127.0.0.1:3000',
     'http://localhost:3000'
 ]

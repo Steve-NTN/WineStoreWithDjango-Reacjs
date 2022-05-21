@@ -27,7 +27,6 @@ const cartReducer = (state = initialState, action) => {
       }
 
       case 'ADD_CART':
-        console.log('click add')
         let check_exists = false;
         state.Carts.map((s, index) => {
           if(s.product_id === action.payload.product_id) {

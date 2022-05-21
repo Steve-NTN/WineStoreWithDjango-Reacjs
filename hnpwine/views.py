@@ -37,7 +37,7 @@ def products(request):
         all_products = (Product.objects.filter(product_name__contains=data.get('search_key')) 
             if data.get('search_key') else Product.objects.all()
         )
-        all_products = GetAllProductSerializer(all_products.values(), many=True).data
+        all_products = GetAllProductSerializer(all_products, many=True).data
         total_quantity = len(all_products)
         page_size, page_index = int(data.get('page_size')), int(data.get('page_index'))
         start = page_index * page_size

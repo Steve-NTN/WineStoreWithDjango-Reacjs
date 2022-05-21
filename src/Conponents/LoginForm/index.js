@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import useStyles from './styles';
 import CustomInput from '../CustomInput';
 import CustomButton from '../CustomButton';
-// import CustomDialog from '../CustomDialog';
+import CustomDialog from '../CustomDialog';
 import { Link, useHistory } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -88,7 +88,7 @@ const LoginForm = () => {
             </Grid>
 
             <Box mt={4} className={classes.centerBox}>
-              <CustomButton text='Đăng nhập' padding='8px 16px' type='submit'/>
+             <span > <CustomButton text='Đăng nhập' padding='8px 16px' type='submit'/></span>
             </Box>
 
             <Box my={2}>

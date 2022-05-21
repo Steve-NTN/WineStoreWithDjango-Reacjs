@@ -158,7 +158,7 @@ const SuccessfulForm = () => {
   return (
     <>
       <Typography variant='h5' fontWeight={600} align='center'>
-        Đang chờ cửa hàng xác nhận thông tin
+        Mua hàng thành công
       </Typography>
     </>
   )
