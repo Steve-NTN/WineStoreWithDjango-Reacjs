@@ -143,6 +143,7 @@ export default function Header() {
             </IconButton>
 
           </Box>
+          
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             {pages.map((page, index) => (
