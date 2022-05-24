@@ -27,7 +27,6 @@ const ProductList = () => {
     products: []
   });
 
-  console.log(data)
   const [productFilter, setproductFilter] = useState({
     page_index: 0,
     page_size: 16,
@@ -68,6 +67,8 @@ const ProductList = () => {
   const handleSelectProduct = (product) => {
     setSelectedProduct(product);
   }
+
+  console.log(productFilter)
 
   useEffect(() =>  {
     setshowLoading(true);

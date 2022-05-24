@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Dialog, DialogContent, DialogTitle, Typography, Box, Rating } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, Typography, Box, Rating,
+  Grid
+} from '@mui/material';
 // import { useParams } from 'react-router-dom';
 import apiTemplate from '../../api';
 import useStyles from './styles';
@@ -40,32 +42,46 @@ const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
             <Typography className={classes.title} variant='h5'>
               Thông tin sản phẩm
             </Typography>
-            <Typography className={classes.title} sx={{fontWeight: 600}}>
-              {data?.product_name}
-            </Typography>
           </DialogTitle>
-          <DialogContent>
-            <Box sx={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-              <img src={data?.product_image? `${configs.DOMAIN_MEDIA}${data?.product_image}`: noImage}
-                style={{maxWidth: '100%', maxHeight: 300}} alt='img_pro'
-              />
-            </Box>
-            <Box className={classes.productText}>
-              <Typography sx={{fontWeight: 600, color: 'red'}}>
-                $ {data?.product_price}
-              </Typography>
-              <Rating
-                name="simple-controlled"
-                value={data?.product_vote || 0}
-                readOnly
-              />
-              <Typography className={classes.productName}>
-                {data?.product_category}
-              </Typography>
-              <Typography variant='body2'>
-                {data?.product_description}
-              </Typography>
-            </Box>
+          <DialogContent sx={{
+            '& .MuiPaper-root': {
+              width: '85%'
+            }
+          }}>
+            <Grid container>
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.title} sx={{fontWeight: 600}}>
+                  {data?.product_name}
+                </Typography>
+                <Box my={3} sx={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+                  <img src={data?.product_image? `${configs.DOMAIN_MEDIA}${data?.product_image}`: noImage}
+                    style={{maxWidth: '100%', maxHeight: 300}} alt='img_pro'
+                  />
+                </Box>
+                <Box className={classes.productText}>
+                  <Typography sx={{fontWeight: 600, color: 'red'}}>
+                    $ {data?.product_price}
+                  </Typography>
+                  <Rating
+                    name="simple-controlled"
+                    value={data?.product_vote || 0}
+                    readOnly
+                  />
+                  <Typography className={classes.productName}>
+                    {data?.product_category}
+                  </Typography>
+                </Box>
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Typography sx={{color: 'red'}}>
+                  Mô tả:
+                </Typography>
+                <Typography variant='body2' sx={{mt: 2}}>
+                  {data?.product_description}
+                </Typography>
+              </Grid>
+            </Grid>
           </DialogContent>
         </>
       ) : <Loading/>
