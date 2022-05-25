@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Typography, Grid, Box, Card, CardMedia, CardContent, CardActionArea, CircularProgress,
-  IconButton, InputAdornment, Rating
+  IconButton, InputAdornment, Rating, Select, MenuItem, InputLabel
  } from '@mui/material';
 import useStyles from './styles';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -30,7 +30,8 @@ const ProductList = () => {
   const [productFilter, setproductFilter] = useState({
     page_index: 0,
     page_size: 16,
-    search_key: ''
+    search_key: '',
+    order: 'product_price'
   });
   const [showLoading, setshowLoading] = useState(true);
   const [openProductDetail, setOpenProductDetail] = useState(false);
@@ -66,7 +67,7 @@ const ProductList = () => {
 
   const handleSelectProduct = (product) => {
     setSelectedProduct(product);
-  }
+  };
 
   console.log(productFilter)
 
@@ -92,21 +93,40 @@ const ProductList = () => {
           Sản phẩm của chúng tôi
         </Typography>
 
-        <Typography sx={{fontWeight: 600}} my={3} ml={2}>
-          {`Tìm kiếm sản phẩm (${data?.products?.length} kết quả)`}
-        </Typography>
-        <CustomInput getValue={(value) => setproductFilter({...productFilter, search_key: value})}
-          required={true} att={{marginLeft: 2}}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment>
-                <IconButton>
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-        />
+        <Box display='flex' justifyContent={'space-between'}>
+          <Box>
+            <Typography sx={{fontWeight: 600}} my={3} ml={2}>
+              {`Tìm kiếm sản phẩm (${data?.products?.length} kết quả)`}
+            </Typography>
+            <CustomInput getValue={(value) => setproductFilter({...productFilter, search_key: value})}
+              required={true} att={{marginLeft: 2}}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment>
+                    <IconButton>
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />
+          </Box>
+          <Box mr={2}>
+            <Typography>
+
+            </Typography>
+            <Select
+              defaultValue='product_price'
+              value={productFilter?.order}
+              onChange={(e) => {
+                  setproductFilter({...productFilter, order: e.target.value}
+                )}}
+            >
+              <MenuItem value={'product_price'}>Giá tăng dần</MenuItem>
+              <MenuItem value={'-product_price'}>Giá giảm dần</MenuItem>
+            </Select>
+          </Box>
+        </Box>
         {
           showLoading ? (
             <Box my={6} textAlign='center' minHeight={300}>

@@ -34,8 +34,14 @@ def home(request):
 def products(request):
     try:
         data = request.data.copy()
-        all_products = (Product.objects.filter(product_name__contains=data.get('search_key')) 
-            if data.get('search_key') else Product.objects.all()
+
+        # check order by sort
+        sort = data.get('sort') or 'product_price'
+        print(data)
+
+        all_products = (
+            Product.objects.filter(product_name__contains=data.get('search_key')).order_by(sort)
+            if data.get('search_key') else Product.objects.all().order_by(sort)
         )
         all_products = GetAllProductSerializer(all_products, many=True).data
         total_quantity = len(all_products)
