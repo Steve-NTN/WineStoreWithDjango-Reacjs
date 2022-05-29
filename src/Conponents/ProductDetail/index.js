@@ -55,7 +55,7 @@ const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
                 </Typography>
                 <Box my={3} sx={{width: '100%', display: 'flex', justifyContent: 'center'}}>
                   <img src={data?.product_image? `${configs.DOMAIN_MEDIA}${data?.product_image}`: noImage}
-                    style={{maxWidth: '100%', maxHeight: 300}} alt='img_pro'
+                    style={{maxWidth: '80%', maxHeight: 300}} alt='img_pro'
                   />
                 </Box>
                 <Box className={classes.productText}>
@@ -74,10 +74,10 @@ const ProductDetail = ({product, openProductDetail, closeProductDetail}) => {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Typography sx={{color: 'red'}}>
+                <Typography sx={{color: 'red', marginBottom: '20px'}}>
                   Mô tả:
                 </Typography>
-                <Typography variant='body2' sx={{mt: 2}}>
+                <Typography variant='body5' sx={{mt: 2, wordSpacing:'7px'}}>
                   {data?.product_description}
                 </Typography>
               </Grid>

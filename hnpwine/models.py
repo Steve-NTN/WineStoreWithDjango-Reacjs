@@ -20,7 +20,7 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='image', blank=True, null=True)
     product_vote = models.IntegerField(default=0)
     product_price = models.IntegerField(null=False)
-    product_description = models.CharField(max_length=150, blank=True, null=True)
+    product_description = models.CharField(max_length=500, blank=True, null=True)
 
     def save(self):
         self.product_code = replace_character(no_accent_vietnamese(self.product_name), '-')
@@ -51,6 +51,7 @@ class BillOrder(models.Model):
     bill_id = models.ForeignKey(Bill, null=True, on_delete=models.SET_NULL)
     product_id = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     quantity = models.IntegerField()
+    
 
 class ProductStock(models.Model):
     product_id = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
@@ -64,3 +65,4 @@ class ProductStock(models.Model):
 
     def __str__(self):
         return f"{self.product_id}-{self.product_name}"
+
