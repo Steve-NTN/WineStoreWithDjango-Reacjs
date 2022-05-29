@@ -1,6 +1,6 @@
 from unittest import result
 from django.shortcuts import render
-from .models import BillOrder, Product, ProductCategory, Bill, ProductStock
+from .models import BillOrder, Product, ProductCategory, Bill, ProductStock, Statistical
 from rest_framework.decorators import api_view
 from .serializers import (
     GetAllBillSerializer, GetAllProductSerializer, GetAllProductCategorySerializer, 
@@ -29,7 +29,7 @@ def home(request):
 #     serializer = GetAllProductSerializer(products, many=True)
 #     return Response(serializer.data)
 
-# Get limit 5 first product
+# get products with filter and sort
 @api_view(['POST'])
 def products(request):
     try:
@@ -101,14 +101,6 @@ def categories(request):
         'categories': serializer.data
     })
 
-# Create your views here.
-@api_view(['GET'])
-def bill(request):
-    orders = Bill.objects.all()
-    serializer = GetAllBillSerializer(orders, many=True)
-    return Response(serializer.data)
-
-
 # create user
 @api_view(['POST'])
 def register(request):
@@ -163,6 +155,13 @@ def create_order(request):
                     crt_qlt = None
 
                 if crt_qlt:
+                    # add on staticatical
+                    new_statictical = Statistical.objects.create(
+                        product_id=Product.objects.get(product_id=product.get('product_id')),
+                        order_date=datetime.datetime.now(),
+                        order_quantity=product.get('quantity')
+                    )
+
                     new_product = BillOrder.objects.create(
                         bill_id=new_order,
                         product_id=Product.objects.get(product_id=product.get('product_id')),

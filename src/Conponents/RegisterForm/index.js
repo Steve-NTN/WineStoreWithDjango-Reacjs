@@ -36,7 +36,8 @@ const LoginForm = () => {
 
     // Check password
     if(account?.password !== account?.rePassword) {
-      setErrorText('Mật khẩu nhập lại không chính xác. Vui lòng kiểm tra')
+      setErrorText('Mật khẩu nhập lại không chính xác. Vui lòng kiểm tra');
+      return;
     }
 
     dispatch(setLoading({open: true}));

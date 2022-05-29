@@ -148,14 +148,14 @@ const UpdateBox = ({row, cart}) => {
 
   return (
     <Box display='flex' justifyContent={'center'} alignItems='center'>
-      <IconButton onClick={() => dispatch(addCart(row))}>
-        <AddIcon />
+      <IconButton onClick={() => dispatch(reduceCart(row))}>
+        <RemoveIcon />
       </IconButton>
       <Typography>
       {row?.quantity}
       </Typography>
-      <IconButton onClick={() => dispatch(reduceCart(row))}>
-        <RemoveIcon />
+      <IconButton onClick={() => dispatch(addCart(row))}>
+        <AddIcon />
       </IconButton>
     </Box>
   )

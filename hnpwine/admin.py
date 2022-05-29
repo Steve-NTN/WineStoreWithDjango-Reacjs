@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Product, ProductCategory, Bill, BillOrder, ProductStock
+from .models import Product, ProductCategory, Bill, BillOrder, ProductStock, Statistical
+from datetime import date
+from django.utils.translation import gettext_lazy as _
 
 # Register your models here.
 @admin.register(Product)
@@ -21,5 +23,24 @@ class BillOrderAdmin(admin.ModelAdmin):
 
 @admin.register(ProductStock)
 class ProductStockAdmin(admin.ModelAdmin):
-  list_display = ("product_name", "quantity_in_stock")
+  list_display = ("product_id", "quantity_in_stock")
 
+
+class StatisticalFilter(admin.SimpleListFilter):
+  title = _('Lọc theo ngày')
+
+  def lookups(self, request, model_admin):
+    qs = model_admin.get_queryset(request)
+    if qs.filter(
+      order_date=date(1980, 1, 1),
+    ).exists():
+      yield ('80s', _('in the eighties'))
+    # if qs.filter(
+    #   order_date=date(1990, 1, 1),
+    # ).exists():
+    #   yield ('90s', _('in the nineties'))
+
+@admin.register(Statistical)
+class StatisticalAdmin(admin.ModelAdmin):
+  list_display = ("product_id", "order_date", "order_quantity")
+  list_filter = ('order_date', 'product_id')

@@ -38,6 +38,7 @@ const ProductList = () => {
   const cart = useSelector((state) => state.cartReducer);
   const user = useSelector((state) => state.userReducer);
   const history = useHistory();
+  const titleRef = useRef();
 
   const handleViewProduct = () => {
     setOpenProductDetail(true);
@@ -53,8 +54,8 @@ const ProductList = () => {
         dispatch(addCart(product));
       }
     }
-
   };
+  
   const options = [
     {label: 'Xem chi tiết sản phẩm', icon: <VisibilityIcon/>, event: handleViewProduct},
     {label: 'Thêm vào danh sách yêu thích', icon: <FavoriteIcon/>, event: handleLikeProduct},
@@ -62,7 +63,8 @@ const ProductList = () => {
   ];
 
   const handleChangePagination = (e, value) => {
-    setproductFilter({...productFilter, page_index: value - 1})
+    setproductFilter({...productFilter, page_index: value - 1});
+    titleRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleSelectProduct = (product) => {
@@ -89,7 +91,8 @@ const ProductList = () => {
   return (
     <Box display='flex' justifyContent={'center'}>
       <Box maxWidth={1400} width='100%'>
-        <Typography variant='h5' sx={{fontWeight: 600}} align='center' my={7}>
+        <Box ref={titleRef}/>
+        <Typography variant='h5' sx={{fontWeight: 600}} align='center' my={7} >
           Sản phẩm của chúng tôi
         </Typography>
 

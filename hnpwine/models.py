@@ -66,3 +66,11 @@ class ProductStock(models.Model):
     def __str__(self):
         return f"{self.product_id}-{self.product_name}"
 
+class Statistical(models.Model):
+    product_id = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    order_date = models.DateTimeField()
+    order_quantity = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.product_id}-{self.order_date}-{self.order_quantity}"
+
