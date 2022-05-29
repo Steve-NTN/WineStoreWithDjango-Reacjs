@@ -31,7 +31,7 @@ const ProductList = () => {
     page_index: 0,
     page_size: 16,
     search_key: '',
-    order: 'product_price'
+    sort: 'product_price'
   });
   const [showLoading, setshowLoading] = useState(true);
   const [openProductDetail, setOpenProductDetail] = useState(false);
@@ -117,9 +117,9 @@ const ProductList = () => {
             </Typography>
             <Select
               defaultValue='product_price'
-              value={productFilter?.order}
+              value={productFilter?.sort}
               onChange={(e) => {
-                  setproductFilter({...productFilter, order: e.target.value}
+                  setproductFilter({...productFilter, sort: e.target.value}
                 )}}
             >
               <MenuItem value={'product_price'}>Giá tăng dần</MenuItem>
