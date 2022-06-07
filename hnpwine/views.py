@@ -22,6 +22,12 @@ def home(request):
     context = {"products": products}
     return render(request, 'product/index.html', context)
 
+@api_view(['GET'])
+def statistical(request):
+    statisticals = Statistical.objects.all()
+    print(statisticals)
+    return render(request, 'statistical.html', {})
+
 # Get all of product
 # @api_view(['GET'])
 # def products(request):
